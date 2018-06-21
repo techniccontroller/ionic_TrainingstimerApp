@@ -3,16 +3,88 @@
     <button ion-button menuToggle>
       <ion-icon name="menu"></ion-icon>
     </button>
-    <ion-title>Home</ion-title>
+    <ion-title>Trainingstimer</ion-title>
+    <ion-buttons end>
+      <button ion-button icon-only clear (click)="repeat()">
+        <ion-icon name="repeat"></ion-icon>
+      </button>
+    </ion-buttons>
   </ion-navbar>
 </ion-header>
 
-<ion-content padding>
-  <h3>Ionic Menu Starter</h3>
-
-  <p>
-    If you get lost, the <a href="http://ionicframework.com/docs/v2">docs</a> will show you the way.
-  </p>
-
-  <button ion-button secondary menuToggle>Toggle Menu</button>
+<ion-content padding >
+  <h4>time to next set</h4>
+  <ion-row align-items-center>
+    <ion-col col-3>
+      <button ion-button [disabled]="running" (click)="setTimeInSeconds(60)" style="width: 100%;">60</button>
+    </ion-col>
+    <ion-col col-6>
+      <div class="numberdisplay" id=content>
+        {{currentTime}}
+      </div>
+    </ion-col>
+    <ion-col col-3>
+      <button ion-button [disabled]="running" (click)="setTimeInSeconds(180)" style="width: 100%;">180</button>
+    </ion-col>
+  </ion-row>
+  <br>
+  <br>
+  <h4>next set</h4>
+  <ion-row>
+    <ion-col col-3>
+    </ion-col>
+    <ion-col col-6>
+      <div class="numberdisplay">
+        <div *ngIf="currentSet==0">W</div>
+        <div *ngIf="currentSet!=0">{{currentSet}}</div>
+      </div>
+    </ion-col>
+    <ion-col col-3>
+    </ion-col>
+  </ion-row>
 </ion-content>
+
+<ion-footer>
+  <ion-grid>
+    <ion-row>
+      <ion-col col-2>
+        <div class="setBox" [class.selected]="currentSet>0">
+          W
+        </div>
+      </ion-col>
+      <ion-col col-2>
+        <div class="setBox" [class.selected]="currentSet>1">
+          1
+        </div>
+      </ion-col>
+      <ion-col col-2>
+        <div class="setBox" [class.selected]="currentSet>2">
+          2
+        </div>
+      </ion-col>
+      <ion-col col-2>
+        <div class="setBox" [class.selected]="currentSet>3">
+          3
+        </div>
+      </ion-col>
+      <ion-col col-2>
+        <div class="setBox" [class.selected]="currentSet>4">
+          4
+        </div>
+      </ion-col>
+      <ion-col col-2>
+        <div class="setBox" [class.selected]="currentSet>5">
+          5
+        </div>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col col-6>
+        <button ion-button [disabled]="running" (click)="startTimer()" id=button style="width: 100%;height: 70px">Start Timer</button>
+      </ion-col>
+      <ion-col col-6>
+        <button ion-button [disabled]="!running" (click)="stopTimer()" id=button style="width: 100%;height: 70px">Stop Timer</button>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-footer>
